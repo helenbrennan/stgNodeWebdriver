@@ -1,0 +1,25 @@
+{
+  "name": "stgnodewebdriver",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/helenbrennan/stgNodeWebdriver.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/helenbrennan/stgNodeWebdriver/issues"
+  },
+  "homepage": "https://github.com/helenbrennan/stgNodeWebdriver#readme",
+  "dependencies": {
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
+    "chromedriver": "^88.0.0",
+    "selenium-webdriver": "^4.0.0-alpha.8"
+  }
+}
