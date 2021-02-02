@@ -30,14 +30,13 @@ describe ("challenge3 suite", function(){
         });
 
     it("Should find and click on the 'Trending' link", async function(){
-            let trendingLink = await driver.findElement(By.xpath('//*[@id="tabTrending"]')).click;
-
+        await driver.findElement(By.xpath('//*[@id="tabTrending"]')).click;
     });
 
     it("Goes through the popular makes and models and prints the link and the make or model name", async function () {
         let popularList = await driver.findElements(By.xpath('//*[@id="tabTrending"]/div[1]//a'));
-        for (let i=0; i < popularList.length - 1; i++ ){
-            console.log(await popularList[i].getText() + " - " + await popularList[i].getAttribute("href"));
+        for (let i=0; i < popularList.length - 1; i++ ){ //  popularList.length - 1 because there is a 'more' link that links to a registration page that I don't care about
+        console.log(await popularList[i].getText() + " - " + await popularList[i].getAttribute("href"));
         }
 
     });

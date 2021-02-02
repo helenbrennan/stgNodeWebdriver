@@ -32,15 +32,27 @@ describe ("challenge5 suite", function(){
         it("Should search for 'porsche'", async function(){
             let element = await driver.findElement(By.xpath('//*[@id="input-search"]'))
             return element.sendKeys("porsche" + Key.ENTER);
-            
+        }); 
+        it("Finds 'PORSCHE' in the search results", async function () {
+            await driver.wait(until.elementLocated(By.xpath('//table[@id="serverSideDataTable"]//td')), 2000)
+            let searchResults = await driver.findElement(By.id("serverSideDataTable")).getText();
+            return assert.include(searchResults, "PORSCHE", "Porsche was found in the search results.")
+        });
 
-    it("Goes through the popular makes and models and prints the link and the make or model", async function () {
-        let popularList = await driver.findElements(By.xpath('//*[@id="tabTrending"]/div[1]//a'));
-        for (let i=0; i < popularList.length - 1; i++ ){
-            console.log(await popularList[i].getText() + " - " + await popularList[i].getAttribute("href"));
-        }
+        it("will wait for the spinner to be gone and change the drop down to show 100 entries", async function(){
+            await driver.wait(until.elementIsNotVisible(driver.findElement(By.id("serverSideDataTable_processing"))));
+            await driver.findElement(By.xpath('//*[@id="serverSideDataTable_length"]//option[@value="100"]')).click;
+            let oneToOneHundred = await driver.findElement(By.xpath('//*[@id="serverSideDataTable_info"]'));
+            return assert.include(oneToOneHundred, "Showing 1 to ", "There aren't 100 entries showing");
+        });
 
-    });
+    // it("Adds the ", async function () {
+    //     let popularList = await driver.findElements(By.xpath('//*[@id="tabTrending"]/div[1]//a'));
+    //     for (let i=0; i < popularList.length - 1; i++ ){
+    //         console.log(await popularList[i].getText() + " - " + await popularList[i].getAttribute("href"));
+    //     }
+
+    // });
     });
 
 
