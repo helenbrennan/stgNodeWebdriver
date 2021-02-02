@@ -6,7 +6,7 @@ Key = webdriver.Key;
 until = webdriver.until;
 
 
-describe ("challenge2 suite", function(){
+describe ("challenge5 suite", function(){
     this.timeout(20000);
     var driver;
     before (function () {
@@ -23,20 +23,23 @@ describe ("challenge2 suite", function(){
     it("Should go to copart.com", function(){
         return driver.get("https://www.copart.com/");
     });
+
     it("Should have a title that includes 'Copart'", async function(){
         let title = await driver.getTitle()
         return assert.include(title, "Copart", "Copart not found in title");
         });
 
-    it("Should search for 'exotic'", async function(){
-        let element = await driver.findElement(By.xpath('//*[@id="input-search"]'))
-        return element.sendKeys("exotic" + Key.ENTER);
-        
-    });
-    it("Finds 'PORSCHE' in the search results", async function () {
-        await driver.wait(until.elementLocated(By.xpath('//table[@id="serverSideDataTable"]//td')), 2000)
-        let porscheResults = await driver.findElement(By.xpath('//table[@id="serverSideDataTable"]//span[text()="PORSCHE"]'))
-        return assert.isNotOk(porscheResults.length > 0, "'PORSCHE' was present in the results.")
+        it("Should search for 'porsche'", async function(){
+            let element = await driver.findElement(By.xpath('//*[@id="input-search"]'))
+            return element.sendKeys("porsche" + Key.ENTER);
+            
+
+    it("Goes through the popular makes and models and prints the link and the make or model", async function () {
+        let popularList = await driver.findElements(By.xpath('//*[@id="tabTrending"]/div[1]//a'));
+        for (let i=0; i < popularList.length - 1; i++ ){
+            console.log(await popularList[i].getText() + " - " + await popularList[i].getAttribute("href"));
+        }
+
     });
     });
 
