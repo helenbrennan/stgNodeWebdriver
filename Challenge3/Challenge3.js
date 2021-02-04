@@ -25,7 +25,7 @@ describe ("challenge3 suite", function(){
     });
 
     it("Should have a title that includes 'Copart'", async function(){
-        let title = await driver.getTitle()
+        var title = await driver.getTitle()
         return assert.include(title, "Copart", "Copart not found in title");
         });
 
@@ -34,9 +34,9 @@ describe ("challenge3 suite", function(){
     });
 
     it("Goes through the popular makes and models and prints the link and the make or model name", async function () {
-        let popularList = await driver.findElements(By.xpath('//*[@id="tabTrending"]/div[1]//a'));
+        var popularList = await driver.findElements(By.xpath('//*[@id="tabTrending"]/div[1]//a'));
         for (let i=0; i < popularList.length - 1; i++ ){ //  popularList.length - 1 because there is a 'more' link that links to a registration page that I don't care about
-        console.log(await popularList[i].getText() + " - " + await popularList[i].getAttribute("href"));
+        console.log(await popularList[i].getAttribute("textContent") + " - " + await popularList[i].getAttribute("href"));
         }
 
     });
