@@ -29,9 +29,9 @@ describe ("challenge3 suite", function(){
         return assert.include(title, "Copart", "Copart not found in title");
         });
 
-    it("Should find and click on the 'Trending' link", async function(){
-        await driver.findElement(By.xpath('//*[@id="tabTrending"]')).click;
-    });
+    // it("Should find and click on the 'Trending' link", async function(){
+    //     await driver.findElement(By.xpath('//*[@id="tabTrending"]')).click;
+    // });
 
     it("Goes through the popular makes and models and prints the link and the make or model name", async function () {
         var popularList = await driver.findElements(By.xpath('//*[@id="tabTrending"]/div[1]//a'));

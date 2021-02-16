@@ -106,3 +106,4 @@ dist
 #all of the node module directory, hopefully
 node_modules\
 .vscode/launch.json
+test.js

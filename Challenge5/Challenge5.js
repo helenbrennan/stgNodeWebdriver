@@ -30,29 +30,40 @@ describe ("challenge5 suite", function(){
         });
 
         it("Should search for 'porsche'", async function(){
-            var element = await driver.findElement(By.xpath('//*[@id="input-search"]'))
-            return element.sendKeys("porsche" + Key.ENTER);
+            await driver.findElement(By.xpath('//*[@id="input-search"]')).sendKeys("porsche");
+            await driver.findElement(By.xpath('//*[@data-uname="homepageHeadersearchsubmit"]')).click();
         }); 
+
         it("Finds 'PORSCHE' in the search results", async function () {
-            await driver.wait(until.elementLocated(By.xpath('//table[@id="serverSideDataTable"]//td')), 2000)
+            await driver.wait(until.elementLocated(By.xpath('//table[@id="serverSideDataTable"]//td')), 5000);
             var searchResults = await driver.findElement(By.id("serverSideDataTable")).getText();
-            return assert.include(searchResults, "PORSCHE", "Porsche was found in the search results.")
+            return assert.include(searchResults, "PORSCHE", "Porsche was found in the search results.");
         });
 
-        it("will wait for the spinner to be gone and change the drop down to show 100 entries", async function(){
-            await driver.wait(until.elementIsNotVisible(driver.findElement(By.id("serverSideDataTable_processing"))));
-            await driver.findElement(By.xpath('//*[@id="serverSideDataTable_length"]//option[@value="100"]')).click;
-            // return assert.include(oneToOneHundred, "Showing 1 to 100", "There aren't 100 entries showing");
-            var maxEntries = await driver.wait(until.elementLocated(By.xpath('//*[@id="serverSideDataTable"]/tbody/tr[100]')));
-            return assert.isOk(maxEntries, )
+        it("Will change the show entries drop down to 100", async function(){
+            await driver.findElement(By.xpath('//div[@class="top"]//select[@name="serverSideDataTable_length"]//option[@value="100"]')).click;
+            // await driver.wait(until.elementIsNotVisible(driver.findElement(By.id("serverSideDataTable_processing"))));
+            await driver.wait(until.elementLocated(By.xpath('//*[@id="serverSideDataTable"]/tbody/tr[100]')));
+            // return assert.isOk(maxEntries);
         });
 
-    it("Adds the ", async function () {
-        var popularList = await driver.findElements(By.xpath('//*[@id="tabTrending"]/div[1]//a'));
-        for (let i=0; i < popularList.length - 1; i++ ){
-            console.log(await popularList[i].getText() + " - " + await popularList[i].getAttribute("href"));
+    it("Adds the model results and adds to an array and prints the info out", async function () {
+        var modelArray = [];
+        
+        var modelList = await driver.findElements(By.xpath('//*[@data-uname="lotsearchLotmodel"]'));
+        for (var i=0; i < modelList.length; i++ ){
+            // console.log(await modelList[i].getText());
+            modelArray.push(await modelList[i].getText());
+        }
+        sortedArray = modelArray.sort();
+        for (var i=0; i <sortedArray.length; i++){
+            console.log(sortedArray[i]);
         }
 
+    });
+
+    it("Adds the different damage types to an array and prints the info out", async function () {
+        var damageList = await driver.findElements(By.xpath('//*[@data-uname="lotsearchLotdamagedescription"]'));                                                 
     });
     });
 
